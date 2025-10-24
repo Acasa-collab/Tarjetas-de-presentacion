@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tarjeta de Contacto - Martin Salgado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --morado1: #6a11cb;
+      --morado2: #2575fc;
+      --grisFondo: #f5f5f5;
+      --grisTxt: #888;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: var(--grisFondo);
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .card {
+      width: 380px; /* un poco más ancha */
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      text-align: left;
+    }
+    .top {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex: 0 0 100px;
+    }
+    .name {
+      font-weight: 700;
+      font-size: 22px;
+      margin: 0 0 4px 0;
+    }
+    .sub {
+      color: var(--grisTxt);
+      margin: 2px 0;
+      font-size: 15px;
+    }
+    .btn {
+      display: block;
+      text-align: center;
+      margin: 14px 0 10px 0;
+      padding: 14px;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--morado1), var(--morado2));
+      transition: background 0.3s;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #5b0eb2, #1e63da);
+    }
+    .emailLbl {
+      color: var(--grisTxt);
+      font-size: 14px;
+      margin: 2px 0;
+    }
+    .email {
+      word-break: break-all;
+      margin: 0 0 8px 0;
+      font-size: 15px;
+    }
+    .qrWrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+    }
+    #qrcode {
+      width: 160px;
+      height: 160px;
+    }
+    @media (max-width: 400px) {
+      .card {
+        width: 95vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="top">
+      <img class="photo" src="foto.jpeg" alt="Martin Salgado">
+      <div>
+        <h1 class="name">Martin Salgado</h1>
+        <p class="sub">Mazda Santa Fe</p>
+        <p class="sub">Gerente General</p>
+      </div>
+    </div>
+
+    <a class="btn" href="mailto:c.salgado@mazdasantafe.com.mx">Enviar correo</a>
+
+<p class="emailLbl">Correo electrónico</p>
+<p class="email">c.salgado@mazdasantafe.com.mx</p>
+
+<p class="emailLbl">Teléfono</p>
+<p class="email">443 128 4585</p>
+
+
+    <div class="qrWrap">
+      <div id="qrcode"></div>
+    </div>
+  </div>
+
+  <!-- Librería para generar el QR -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    // vCard estándar para guardar contacto al escanear
+const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:Salgado;Martin;;;
+FN:Martin Salgado
+ORG:Mazda Santa Fe
+TITLE:Gerente General
+EMAIL;TYPE=INTERNET:c.salgado@mazdasantafe.com.mx
+TEL;TYPE=CELL:4431284585
+END:VCARD`;
+
+    new QRCode(document.getElementById("qrcode"), {
+      text: vcard,
+      width: 140,
+      height: 140,
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+</body>
+</html>
